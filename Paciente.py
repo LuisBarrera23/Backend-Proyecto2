@@ -1,5 +1,5 @@
 class Paciente:
-    def __init__(self,nombre,apellido,fecha,sexo,user,contraseña,telefono):
+    def __init__(self,nombre,apellido,fecha,sexo,user,contraseña,telefono,id):
         self.nombre=nombre
         self.apellido=apellido
         self.fecha=fecha
@@ -7,6 +7,7 @@ class Paciente:
         self.user=user
         self.contraseña=contraseña
         self.telefono=telefono
+        self.id=id
     
 
     #  metodos get
@@ -32,6 +33,9 @@ class Paciente:
     
     def getTelefono(self):
         return self.telefono
+        
+    def getId(self):
+        return self.id
     
     # Metodos set
 
@@ -55,5 +59,8 @@ class Paciente:
     
     def setTelefono(self,telefono):
         self.telefono=telefono
+
+    def setId(self,id):
+        self.id=id
     
     
