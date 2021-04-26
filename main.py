@@ -15,7 +15,6 @@ cPacientes=0
 app=Flask(__name__)
 CORS(app)
 
-Pacientes.append(Paciente("Angel","Barrera","23/11/00","M","angel2311","566621147",47450380,0))
 
 @app.route('/mostrarpacientes',methods=['GET'])
 def mostrarpacientes():
@@ -29,7 +28,8 @@ def mostrarpacientes():
             'sexo':paciente.getSexo(),
             'usuario':paciente.getUser(),
             'contraseña':paciente.getContraseña(),
-            'telefono':paciente.getTelefono()
+            'telefono':paciente.getTelefono(),
+            'id':paciente.getId()
         }
         datos.append(objeto)
     return (jsonify(datos))
