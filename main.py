@@ -38,7 +38,7 @@ def mostrarpacientes():
 def mostrarpaciente(id):
     global Pacientes
     for paciente in Pacientes:
-       if paciente.getId()==id:
+       if paciente.getId()==int(id):
             objeto={
             'nombre':paciente.getNombre(),
             'apellido':paciente.getApellido(),
