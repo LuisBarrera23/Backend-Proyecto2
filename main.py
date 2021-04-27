@@ -68,7 +68,7 @@ def guardarpaciente():
     sexo=request.json['sexo']
     usuario=request.json['usuario']
     contraseña=request.json['contraseña']
-    telefono=request.json['contraseña']
+    telefono=request.json['telefono']
 
     for paciente in Pacientes:
         if usuario==paciente.getUser():
