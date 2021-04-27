@@ -34,10 +34,9 @@ def mostrarpacientes():
         datos.append(objeto)
     return (jsonify(datos))
 
-@app.route('/consulta/<string:id>',methods=['GET'])
+@app.route('/paciente/<string:id>',methods=['GET'])
 def mostrarpaciente(id):
     global Pacientes
-    datos=[]
     for paciente in Pacientes:
        if paciente.getId()==id:
             objeto={
