@@ -93,10 +93,14 @@ def eliminarpaciente(id):
 @app.route('/actualizarpaciente', methods=['PUT'])
 def actualizarpaciente():
     global Pacientes
-
     for pacientes in Pacientes:
-        if(request.json['usuario']==pacientes.getUser()):
-            return jsonify({'Mensaje':'usuario repetido'})
+        if(request.json['usuario']==pacientes.getUser() and request.json['id']==pacientes.getId()):
+            return jsonify({'Mensaje':'no hay problema es el mismo usuario'})
+        if(request.json['usuario']==pacientes.getUser() and request.json['id']!=pacientes.getId()):
+            return jsonify({'Mensaje':'Usuario ya existente'})
+
+
+            
 
     
 
