@@ -94,7 +94,7 @@ def eliminarpaciente(id):
 def actualizarpaciente():
     global Pacientes
     for pacientes in Pacientes:
-        if((request.json['usuario']==pacientes.getUser()) and (request.json['id']==pacientes.getId())):
+        if((request.json['usuario']==pacientes.getUser()) and (request.json['id']==int(pacientes.getId()))):
             return jsonify({'Mensaje':'no hay problema es el mismo usuario'})
 
     return jsonify({'Mensaje':request.json['id']})
