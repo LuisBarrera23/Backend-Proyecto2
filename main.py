@@ -93,13 +93,34 @@ def eliminarpaciente(id):
 @app.route('/actualizarpaciente', methods=['PUT'])
 def actualizarpaciente():
     global Pacientes
+    repetido=False
     for pacientes in Pacientes:
         if((request.json['usuario']==pacientes.getUser()) and (int(request.json['id'])==pacientes.getId())):
-            return jsonify({'Mensaje':'no hay problema es el mismo usuario'})
+            repetido=False
         if((request.json['usuario']==pacientes.getUser()) and not(int(request.json['id'])==pacientes.getId())):
-            return jsonify({'Mensaje':'este usuario ya existe'})
+            repetido=True
 
-    return jsonify({'Mensaje':request.json['id']})
+    if(repetido==False):
+        for i in range(len(Pacientes)):
+            if(Pacientes[i].getId()==request.json['id']):
+                nombre=request.json['nombre']
+                apellido=request.json['apellido']
+                fecha=request.json['fecha']
+                sexo=request.json['sexo']
+                usuario=request.json['usuario']
+                contraseña=request.json['contraseña']
+                telefono=request.json['telefono']
+
+                Pacientes[i].setNombre(nombre)
+                Pacientes[i].setApellido(apellido)
+                Pacientes[i].setFecha(fecha)
+                Pacientes[i].setSexo(sexo)
+                Pacientes[i].setUser(usuario)
+                Pacientes[i].setContraseña(contraseña)
+                Pacientes[i].setTelefono(telefono)
+    else:
+        return jsonify({'Mensaje':"Usuario repetido, por favor elija otro"})
+    
 
 
 
