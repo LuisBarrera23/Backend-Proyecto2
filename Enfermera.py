@@ -1,4 +1,4 @@
-class Paciente:
+class Enfermera:
     def __init__(self,nombre,apellido,fecha,sexo,user,contraseña,telefono,id):
         self.nombre=nombre
         self.apellido=apellido

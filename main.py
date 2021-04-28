@@ -4,6 +4,9 @@ from flask_cors import CORS
 
 # importacion de las clases que manejaran los objetos
 from Paciente import Paciente
+from Doctor import Doctor
+from Enfermera import Enfermera
+from Medicamento import Medicamento
 
 import json
 
@@ -12,10 +15,21 @@ import json
 Pacientes=[]
 cPacientes=0
 
+Doctores=[]
+cDoctores=0
+
+Enfermeras=[]
+cEnfermeras=0
+
+Medicamentos=[]
+cMedicamentos=0
+
 app=Flask(__name__)
 CORS(app)
 
 
+
+#Metodos de rutas necesarias para pacientes -----------------------------------------------------------------
 @app.route('/mostrarpacientes',methods=['GET'])
 def mostrarpacientes():
     global Pacientes
@@ -51,11 +65,6 @@ def mostrarpaciente(id):
             }
             return (jsonify(objeto))
     
-
-
-    
-
-
 @app.route('/registrar',methods=['POST'])
 def guardarpaciente():
 
@@ -89,7 +98,6 @@ def eliminarpaciente(id):
     
     return jsonify({'Mensaje':'No fue encontrado el usuario'})
 
-
 @app.route('/actualizarpaciente', methods=['PUT'])
 def actualizarpaciente():
     global Pacientes
@@ -122,9 +130,11 @@ def actualizarpaciente():
     else:
         return jsonify({'Mensaje':"Usuario repetido, por favor elija otro"})
     
+#Fin de metodos de rutas para pacientes ---------------------------------------------------------------------
 
+#Metodos de rutas necesarias para medicos -----------------------------------------------------------------
 
-
+#Fin de metodos de rutas para medicos ---------------------------------------------------------------------
             
 
     
