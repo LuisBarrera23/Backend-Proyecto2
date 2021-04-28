@@ -102,7 +102,7 @@ def actualizarpaciente():
 
     if(repetido==False):
         for i in range(len(Pacientes)):
-            if(Pacientes[i].getId()==request.json['id']):
+            if(Pacientes[i].getId()==int(request.json['id'])):
                 nombre=request.json['nombre']
                 apellido=request.json['apellido']
                 fecha=request.json['fecha']
