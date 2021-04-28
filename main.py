@@ -82,9 +82,9 @@ def guardarpaciente():
 def eliminarpaciente():
     global Pacientes
 
-    for paciente in Pacientes:
-        if(paciente.getId()==id):
-            del paciente
+    for i in range(len(Pacientes)):
+        if(Pacientes[i].getId()==id):
+            del Pacientes[i]
             return jsonify({'Mensaje':'El usuario fue eliminado con exito'})
     
     return jsonify({'Mensaje':'No fue encontrado el usuario'})
