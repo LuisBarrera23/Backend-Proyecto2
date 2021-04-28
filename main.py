@@ -79,7 +79,7 @@ def guardarpaciente():
     return jsonify({'Mensaje':"Su cuenta ha sido registrada con exito"})
 
 @app.route('/eliminarpaciente/<int:id>',methods=['DELETE'])
-def eliminarpaciente():
+def eliminarpaciente(id):
     global Pacientes
 
     for i in range(len(Pacientes)):
