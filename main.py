@@ -78,6 +78,17 @@ def guardarpaciente():
     cPacientes+=1
     return jsonify({'Mensaje':"Su cuenta ha sido registrada con exito"})
 
+@app.route('/eliminarpaciente/<int:id>',methods=['DELETE'])
+def eliminarpaciente():
+    global Pacientes
+
+    for paciente in Pacientes:
+        if(paciente.getId()==id):
+            del paciente
+            return jsonify({'Mensaje':'El usuario fue eliminado con exito'})
+    
+    return jsonify({'Mensaje':'No fue encontrado el usuario'})
+
 
     
 
