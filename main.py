@@ -96,8 +96,7 @@ def actualizarpaciente():
     for pacientes in Pacientes:
         if(request.json['usuario']==pacientes.getUser() and request.json['id']==pacientes.getId()):
             return jsonify({'Mensaje':'no hay problema es el mismo usuario'})
-        if(request.json['usuario']==pacientes.getUser() and request.json['id']!=pacientes.getId()):
-            return jsonify({'Mensaje':'Usuario ya existente'})
+
 
 
             
