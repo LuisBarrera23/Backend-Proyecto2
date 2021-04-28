@@ -90,6 +90,14 @@ def eliminarpaciente(id):
     return jsonify({'Mensaje':'No fue encontrado el usuario'})
 
 
+@app.route('/actualizarpaciente', methods=['PUT'])
+def actualizarpaciente():
+    global Pacientes
+
+    for pacientes in Pacientes:
+        if(request.json['usuario']==pacientes.getUser()):
+            return jsonify({'Mensaje':'usuario repetido'})
+
     
 
 
