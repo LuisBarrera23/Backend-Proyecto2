@@ -118,6 +118,7 @@ def actualizarpaciente():
                 Pacientes[i].setUser(usuario)
                 Pacientes[i].setContraseña(contraseña)
                 Pacientes[i].setTelefono(telefono)
+                return jsonify({'Mensaje':"Su perfil ha sido modificado"})
     else:
         return jsonify({'Mensaje':"Usuario repetido, por favor elija otro"})
     
