@@ -133,6 +133,47 @@ def actualizarpaciente():
 #Fin de metodos de rutas para pacientes ---------------------------------------------------------------------
 
 #Metodos de rutas necesarias para medicos -----------------------------------------------------------------
+@app.route('/registrarmedico',methods=['POST'])
+def guardarmedico():
+
+    global Doctores
+    global cDoctores
+
+    nombre=request.json['nombre']
+    apellido=request.json['apellido']
+    fecha=request.json['fecha']
+    sexo=request.json['sexo']
+    usuario=request.json['usuario']
+    contraseña=request.json['contraseña']
+    especialidad=request.json['especialidad']
+    telefono=request.json['telefono']
+
+    for doctor in Doctores:
+        if usuario==doctor.getUser():
+            return jsonify({'Mensaje':"El usuario ya existe, por favor ingrese uno diferente"})
+
+    Doctores.append(Doctor(nombre,apellido,fecha,sexo,usuario,contraseña,especialidad,telefono,cDoctores))
+    cDoctores+=1
+    return jsonify({'Mensaje':"Doctor registrado con exito"})
+
+@app.route('/mostrarmedicos',methods=['GET'])
+def mostrarmedicos():
+    global Doctores
+    datos=[]
+    for doctor in Doctores:
+        objeto={
+            'nombre':doctor.getNombre(),
+            'apellido':doctor.getApellido(),
+            'fecha':doctor.getFecha(),
+            'sexo':doctor.getSexo(),
+            'usuario':doctor.getUser(),
+            'contraseña':doctor.getContraseña(),
+            'especialidad':doctor.getEspecialidad(),
+            'telefono':doctor.getTelefono(),
+            'id':doctor.getId()
+        }
+        datos.append(objeto)
+    return (jsonify(datos))
 
 #Fin de metodos de rutas para medicos ---------------------------------------------------------------------
             
