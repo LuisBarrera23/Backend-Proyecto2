@@ -133,8 +133,8 @@ def actualizarpaciente():
 #Fin de metodos de rutas para pacientes ---------------------------------------------------------------------
 
 #Metodos de rutas necesarias para medicos -----------------------------------------------------------------
-@app.route('/registrarmedico',methods=['POST'])
-def guardarmedico():
+@app.route('/registrardoctor',methods=['POST'])
+def guardardoctor():
 
     global Doctores
     global cDoctores
@@ -154,7 +154,7 @@ def guardarmedico():
 
     Doctores.append(Doctor(nombre,apellido,fecha,sexo,usuario,contraseña,especialidad,telefono,cDoctores))
     cDoctores+=1
-    return jsonify({'Mensaje':"Doctor registrado con exito"})
+    return jsonify({'Mensaje':"Su cuenta ha sido registrada con exito"})
 
 @app.route('/mostrarmedicos',methods=['GET'])
 def mostrarmedicos():
