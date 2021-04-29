@@ -175,6 +175,24 @@ def mostrarmedicos():
         datos.append(objeto)
     return (jsonify(datos))
 
+@app.route('/doctor/<string:id>',methods=['GET'])
+def mostrardoctor(id):
+    global Doctores
+    for doctor in Doctores:
+       if doctor.getId()==int(id):
+            objeto={
+            'nombre':doctor.getNombre(),
+            'apellido':doctor.getApellido(),
+            'especialidad':doctor.getEspecialidad(),
+            'fecha':doctor.getFecha(),
+            'sexo':doctor.getSexo(),
+            'usuario':doctor.getUser(),
+            'contraseña':doctor.getContraseña(),
+            'telefono':doctor.getTelefono(),
+            'id':doctor.getId()
+            }
+            return (jsonify(objeto))
+
 #Fin de metodos de rutas para medicos ---------------------------------------------------------------------
             
 
