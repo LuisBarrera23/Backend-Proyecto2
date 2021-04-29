@@ -204,6 +204,39 @@ def eliminardoctor(id):
     
     return jsonify({'Mensaje':'No fue encontrado el usuario'})
 
+@app.route('/actualizarmedico', methods=['PUT'])
+def actualizarmedico():
+    global Doctores
+    repetido=False
+    for doctor in Doctores:
+        if((request.json['usuario']==doctor.getUser()) and (int(request.json['id'])==doctor.getId())):
+            repetido=False
+        if((request.json['usuario']==doctor.getUser()) and not(int(request.json['id'])==doctor.getId())):
+            repetido=True
+
+    if(repetido==False):
+        for i in range(len(Doctores)):
+            if(Doctores[i].getId()==int(request.json['id'])):
+                nombre=request.json['nombre']
+                apellido=request.json['apellido']
+                especialidad=request.json['especialidad']
+                fecha=request.json['fecha']
+                sexo=request.json['sexo']
+                usuario=request.json['usuario']
+                contraseña=request.json['contraseña']
+                telefono=request.json['telefono']
+
+                Doctores[i].setNombre(nombre)
+                Doctores[i].setApellido(apellido)
+                Doctores[i].setEspecialidad(especialidad)
+                Doctores[i].setFecha(fecha)
+                Doctores[i].setSexo(sexo)
+                Doctores[i].setUser(usuario)
+                Doctores[i].setContraseña(contraseña)
+                Doctores[i].setTelefono(telefono)
+                return jsonify({'Mensaje':"Su perfil ha sido modificado"})
+    else:
+        return jsonify({'Mensaje':"Usuario repetido, por favor elija otro"})
 #Fin de metodos de rutas para medicos ---------------------------------------------------------------------
             
 
