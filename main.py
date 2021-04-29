@@ -193,6 +193,17 @@ def mostrardoctor(id):
             }
             return (jsonify(objeto))
 
+@app.route('/eliminardoctor/<int:id>',methods=['DELETE'])
+def eliminardoctor(id):
+    global Doctores
+
+    for i in range(len(Doctores)):
+        if(Doctores[i].getId()==id):
+            del Doctores[i]
+            return jsonify({'Mensaje':'El usuario fue eliminado con exito'})
+    
+    return jsonify({'Mensaje':'No fue encontrado el usuario'})
+
 #Fin de metodos de rutas para medicos ---------------------------------------------------------------------
             
 
