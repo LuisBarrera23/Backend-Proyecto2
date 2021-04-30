@@ -30,6 +30,7 @@ CORS(app)
 
 
 #Metodos de rutas necesarias para pacientes -----------------------------------------------------------------
+
 @app.route('/mostrarpacientes',methods=['GET'])
 def mostrarpacientes():
     global Pacientes
@@ -238,6 +239,8 @@ def actualizarmedico():
     else:
         return jsonify({'Mensaje':"Usuario repetido, por favor elija otro"})
 #Fin de metodos de rutas para medicos ---------------------------------------------------------------------
+
+
 
 #Metodos de rutas necesarias para Enfermeras -----------------------------------------------------------------
 
