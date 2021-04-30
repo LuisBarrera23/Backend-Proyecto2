@@ -238,6 +238,110 @@ def actualizarmedico():
     else:
         return jsonify({'Mensaje':"Usuario repetido, por favor elija otro"})
 #Fin de metodos de rutas para medicos ---------------------------------------------------------------------
+
+#Metodos de rutas necesarias para Enfermeras -----------------------------------------------------------------
+
+@app.route('/mostrarenfermeras',methods=['GET'])
+def mostrarenfermeras():
+    global Enfermeras
+    datos=[]
+    for enfermera in Enfermeras:
+        objeto={
+            'nombre':enfermera.getNombre(),
+            'apellido':enfermera.getApellido(),
+            'fecha':enfermera.getFecha(),
+            'sexo':enfermera.getSexo(),
+            'usuario':enfermera.getUser(),
+            'contraseña':enfermera.getContraseña(),
+            'telefono':enfermera.getTelefono(),
+            'id':enfermera.getId()
+        }
+        datos.append(objeto)
+    return (jsonify(datos))
+
+@app.route('/enfermera/<string:id>',methods=['GET'])
+def mostrarenfermera(id):
+    global Enfermeras
+    for enfermera in Enfermeras:
+       if enfermera.getId()==int(id):
+            objeto={
+            'nombre':enfermera.getNombre(),
+            'apellido':enfermera.getApellido(),
+            'fecha':enfermera.getFecha(),
+            'sexo':enfermera.getSexo(),
+            'usuario':enfermera.getUser(),
+            'contraseña':enfermera.getContraseña(),
+            'telefono':enfermera.getTelefono(),
+            'id':enfermera.getId()
+            }
+            return (jsonify(objeto))
+    
+@app.route('/registrarenfermera',methods=['POST'])
+def guardarenfermera():
+
+    global Enfermeras
+    global cEnfermeras
+
+    nombre=request.json['nombre']
+    apellido=request.json['apellido']
+    fecha=request.json['fecha']
+    sexo=request.json['sexo']
+    usuario=request.json['usuario']
+    contraseña=request.json['contraseña']
+    telefono=request.json['telefono']
+
+    for enfermera in Enfermeras:
+        if usuario==enfermera.getUser():
+            return jsonify({'Mensaje':"El usuario ya existe, por favor ingrese uno diferente"})
+
+    Enfermeras.append(Enfermera(nombre,apellido,fecha,sexo,usuario,contraseña,telefono,cEnfermeras))
+    cEnfermeras+=1
+    return jsonify({'Mensaje':"Su cuenta ha sido registrada con exito"})
+
+@app.route('/eliminarenfermera/<int:id>',methods=['DELETE'])
+def eliminarenfermera(id):
+    global Enfermeras
+
+    for i in range(len(Enfermeras)):
+        if(Enfermeras[i].getId()==id):
+            del Enfermeras[i]
+            return jsonify({'Mensaje':'El usuario fue eliminado con exito'})
+    
+    return jsonify({'Mensaje':'No fue encontrado el usuario'})
+
+@app.route('/actualizarenfermera', methods=['PUT'])
+def actualizarenfermera():
+    global Enfermeras
+    repetido=False
+    for enfermera in Enfermeras:
+        if((request.json['usuario']==enfermera.getUser()) and (int(request.json['id'])==enfermera.getId())):
+            repetido=False
+        if((request.json['usuario']==enfermera.getUser()) and not(int(request.json['id'])==enfermera.getId())):
+            repetido=True
+
+    if(repetido==False):
+        for i in range(len(Enfermeras)):
+            if(Enfermeras[i].getId()==int(request.json['id'])):
+                nombre=request.json['nombre']
+                apellido=request.json['apellido']
+                fecha=request.json['fecha']
+                sexo=request.json['sexo']
+                usuario=request.json['usuario']
+                contraseña=request.json['contraseña']
+                telefono=request.json['telefono']
+
+                Enfermeras[i].setNombre(nombre)
+                Enfermeras[i].setApellido(apellido)
+                Enfermeras[i].setFecha(fecha)
+                Enfermeras[i].setSexo(sexo)
+                Enfermeras[i].setUser(usuario)
+                Enfermeras[i].setContraseña(contraseña)
+                Enfermeras[i].setTelefono(telefono)
+                return jsonify({'Mensaje':"Su perfil ha sido modificado"})
+    else:
+        return jsonify({'Mensaje':"Usuario repetido, por favor elija otro"})
+
+#Fin de metodos de rutas para Enfermeras ---------------------------------------------------------------------
             
 
     
