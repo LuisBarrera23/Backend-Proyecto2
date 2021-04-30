@@ -388,7 +388,7 @@ def guardarmedicamento():
 
     for medicamento in Medicamentos:
         if nombre==medicamento.getNombre():
-            return jsonify({'Mensaje':"Medicamento agregado con exito"})
+            return jsonify({'Mensaje':"Medicamento repetido"})
 
     Medicamentos.append(Medicamento(nombre,precio,descripcion,cantidad,cMedicamentos))
     cMedicamentos+=1
