@@ -428,9 +428,9 @@ def actualizarmedicamento():
                 Medicamentos[i].setDescripcion(descripcion)
                 Medicamentos[i].setCantidad(cantidad)
 
-                return jsonify({'Mensaje':"Su perfil ha sido modificado"})
+                return jsonify({'Mensaje':"Medicamento modificado"})
     else:
-        return jsonify({'Mensaje':"Usuario repetido, por favor elija otro"})
+        return jsonify({'Mensaje':"Nombre de medicamento ya utilizado"})
 
 #Fin de metodos de rutas para Medicinas ---------------------------------------------------------------------
             
