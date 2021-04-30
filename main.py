@@ -355,7 +355,7 @@ def mostrarmedicamentos():
             'nombre':medicamento.getNombre(),
             'precio':medicamento.getPrecio(),
             'descripcion':medicamento.getDescripcion(),
-            'cantidad':medicamento.getCantidad,
+            'cantidad':medicamento.getCantidad(),
             'id':medicamento.getId()
         }
         datos.append(objeto)
