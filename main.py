@@ -342,6 +342,97 @@ def actualizarenfermera():
         return jsonify({'Mensaje':"Usuario repetido, por favor elija otro"})
 
 #Fin de metodos de rutas para Enfermeras ---------------------------------------------------------------------
+
+
+#Metodos de rutas necesarias para Medicinas -----------------------------------------------------------------
+
+@app.route('/mostrarmedicamentos',methods=['GET'])
+def mostrarmedicamentos():
+    global Medicamentos
+    datos=[]
+    for medicamento in Medicamentos:
+        objeto={
+            'nombre':medicamento.getNombre(),
+            'precio':medicamento.getPrecio(),
+            'descripcion':medicamento.getDescripcion(),
+            'cantidad':medicamento.getCantidad,
+            'id':medicamento.getId()
+        }
+        datos.append(objeto)
+    return (jsonify(datos))
+
+@app.route('/medicamento/<string:id>',methods=['GET'])
+def mostrarmedicamento(id):
+    global Medicamentos
+    for medicamento in Medicamentos:
+       if medicamento.getId()==int(id):
+            objeto={
+            'nombre':medicamento.getNombre(),
+            'precio':medicamento.getPrecio(),
+            'descripcion':medicamento.getDescripcion(),
+            'cantidad':medicamento.getCantidad,
+            'id':medicamento.getId()
+            }
+            return (jsonify(objeto))
+    
+@app.route('/registrarmedicamento',methods=['POST'])
+def guardarmedicamento():
+
+    global Medicamentos
+    global cMedicamentos
+
+    nombre=request.json['nombre']
+    precio=float(request.json['precio'])
+    descripcion=request.json['descripcion']
+    cantidad=int(request.json['cantidad'])
+
+    for medicamento in Medicamentos:
+        if nombre==medicamento.getNombre():
+            return jsonify({'Mensaje':"Medicamento agregado con exito"})
+
+    Medicamentos.append(Medicamento(nombre,precio,descripcion,cantidad,cMedicamentos))
+    cMedicamentos+=1
+    return jsonify({'Mensaje':"Medicamento agregado con exito"})
+
+@app.route('/eliminarmedicamento/<int:id>',methods=['DELETE'])
+def eliminarmedicamento(id):
+    global Medicamentos
+
+    for i in range(len(Medicamentos)):
+        if(Medicamentos[i].getId()==id):
+            del Medicamentos[i]
+            return jsonify({'Mensaje':'El medicamento fue eliminado con exito'})
+    
+    return jsonify({'Mensaje':'No fue encontrado el medicamento'})
+
+@app.route('/actualizarmedicamento', methods=['PUT'])
+def actualizarmedicamento():
+    global Medicamentos
+    repetido=False
+    for medicamento in Medicamentos:
+        if((request.json['nombre']==medicamento.getNombre()) and (int(request.json['id'])==medicamento.getId())):
+            repetido=False
+        if((request.json['nombre']==medicamento.getNombre()) and not(int(request.json['id'])==medicamento.getId())):
+            repetido=True
+
+    if(repetido==False):
+        for i in range(len(Medicamentos)):
+            if(Medicamentos[i].getId()==int(request.json['id'])):
+                nombre=request.json['nombre']
+                precio=float(request.json['precio'])
+                descripcion=request.json['descripcion']
+                cantidad=int(request.json['cantidad'])
+
+                Medicamentos[i].setNombre(nombre)
+                Medicamentos[i].setPrecio(precio)
+                Medicamentos[i].setDescripcion(descripcion)
+                Medicamentos[i].setCantidad(cantidad)
+
+                return jsonify({'Mensaje':"Su perfil ha sido modificado"})
+    else:
+        return jsonify({'Mensaje':"Usuario repetido, por favor elija otro"})
+
+#Fin de metodos de rutas para Medicinas ---------------------------------------------------------------------
             
 
     
