@@ -7,6 +7,7 @@ class Cita:
         self.idcita=idcita
         self.estado='Pendiente'
         self.doctor=''
+        self.iddoctor=-1
     
     #  metodos get
 
@@ -32,6 +33,9 @@ class Cita:
     def getDoctor(self):
         return self.doctor
 
+    def getIddoctor(self):
+        return self.iddoctor
+
     # Metodos set
 
     def setEstado(self,estado):
@@ -39,4 +43,7 @@ class Cita:
 
     def setDoctor(self,doctor):
         self.doctor=doctor
+
+    def setIddoctor(self,iddoctor):
+        self.iddoctor=iddoctor
 

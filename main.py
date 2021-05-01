@@ -456,10 +456,30 @@ def mostrarcitas():
             'motivo':cita.getMotivo(),
             'idcita':cita.getIdcita(),
             'estado':cita.getEstado(),
-            'doctor':cita.getDoctor()
+            'doctor':cita.getDoctor(),
+            'iddoctor':cita.getIddoctor()
         }
         datos.append(objeto)
     return (jsonify(datos))
+
+@app.route('/mostrarcita/<int:id>',methods=['GET'])
+def mostrarcita(id):
+    global Citas
+    for cita in Citas:
+        if(cita.idcita()==id):
+            objeto={
+            'idpaciente':cita.getIdpaciente(),
+            'hora':cita.getHora(),
+            'fecha':cita.getFecha(),
+            'motivo':cita.getMotivo(),
+            'idcita':cita.getIdcita(),
+            'estado':cita.getEstado(),
+            'doctor':cita.getDoctor(),
+            'iddoctor':cita.getIddoctor()
+            }
+            return jsonify(objeto)
+    return jsonify({'Mensaje':'Cita no encontrada'})
+
 
 @app.route('/registrarcita',methods=['POST'])
 def guardarcita():
@@ -488,11 +508,22 @@ def actualizarcita():
             if(Citas[i].getIdcita()==int(request.json['idcita'])):
                 doctor=request.json['doctor']
                 estado=request.json['estado']
+                iddoctor=request.json['iddoctor']
 
-                Citas[i].setDoctor(doctor)
-                Citas[i].setEstado(estado)
+                if(estado=="Rechazada"):
+                    Citas[i].setDoctor(doctor)
+                    Citas[i].setEstado(estado)
 
-                return jsonify({'Mensaje':"Cita actualizada con exito"})
+                    return jsonify({'Mensaje':"Cita actualizada con exito"})
+                
+
+                if(estado=="Aceptada"):
+                    Citas[i].setDoctor(doctor)
+                    Citas[i].setEstado(estado)
+                    Citas[i].setIddoctor(iddoctor)
+
+                    return jsonify({'Mensaje':"Cita actualizada con exito"})
+                
     
     return jsonify({'Mensaje':"Cita no encontrada"})
 
