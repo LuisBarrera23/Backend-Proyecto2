@@ -7,6 +7,7 @@ from Paciente import Paciente
 from Doctor import Doctor
 from Enfermera import Enfermera
 from Medicamento import Medicamento
+from Cita import Cita
 
 import json
 
@@ -23,6 +24,9 @@ cEnfermeras=0
 
 Medicamentos=[]
 cMedicamentos=0
+
+Citas=[]
+cCitas=[]
 
 app=Flask(__name__)
 CORS(app)
@@ -436,6 +440,50 @@ def actualizarmedicamento():
         return jsonify({'Mensaje':"Nombre de medicamento ya utilizado"})
 
 #Fin de metodos de rutas para Medicinas ---------------------------------------------------------------------
+
+
+#Metodos de rutas necesarias para Citas -----------------------------------------------------------------
+
+@app.route('/mostrarcitas',methods=['GET'])
+def mostrarcitas():
+    global Citas
+    datos=[]
+    for cita in Citas:
+        objeto={
+            'idpaciente':cita.getIdpaciente(),
+            'hora':cita.getHora(),
+            'fecha':cita.getFecha(),
+            'motivo':cita.getMotivo(),
+            'idcita':cita.getIdcita(),
+            'estado':cita.getEstado()
+        }
+        datos.append(objeto)
+    return (jsonify(datos))
+
+@app.route('/registrarcita',methods=['POST'])
+def guardarcita():
+
+    global Citas
+    global cCitas
+
+    idpaciente=request.json['idpaciente']
+    hora=request.json['hora']
+    fecha=request.json['fecha']
+    motivo=request.json['motivo']
+
+    for cita in Citas:
+        if idpaciente==cita.getIdpaciente() and (cita.getEstado()=='Pendiente' or cita.getEstado()=='Aceptada'):
+            return jsonify({'Mensaje':"Usted ya tiene una cita en progreso"})
+
+    Citas.append(Cita(idpaciente,hora,fecha,motivo,cCitas))
+    cCitas+=1
+    return jsonify({'Mensaje':"Su cita ha sido agendada, por favor espere una respuesta"})
+
+#Fin de metodos de rutas para Citas ---------------------------------------------------------------------
+
+
+
+
             
 
     
