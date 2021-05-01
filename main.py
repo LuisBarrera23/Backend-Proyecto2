@@ -480,6 +480,21 @@ def guardarcita():
     cCitas+=1
     return jsonify({'Mensaje':"Su cita ha sido agendada, por favor espere una respuesta"})
 
+@app.route('/actualizarcita', methods=['PUT'])
+def actualizarcita():
+    global Citas
+
+    for i in range(len(Citas)):
+            if(Citas[i].getId()==int(request.json['idcita'])):
+                doctor=request.json['doctor']
+                estado=request.json['estado']
+
+                Citas[i].setDoctor(doctor)
+                Citas[i].setEstado(estado)
+
+                return jsonify({'Mensaje':"Cita actualizada con exito"})
+
+
 #Fin de metodos de rutas para Citas ---------------------------------------------------------------------
 
 
