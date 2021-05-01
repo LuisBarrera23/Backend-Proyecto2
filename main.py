@@ -26,7 +26,7 @@ Medicamentos=[]
 cMedicamentos=0
 
 Citas=[]
-cCitas=[]
+cCitas=0
 
 app=Flask(__name__)
 CORS(app)
