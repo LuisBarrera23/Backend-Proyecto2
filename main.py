@@ -466,7 +466,7 @@ def mostrarcitas():
 def mostrarcita(id):
     global Citas
     for cita in Citas:
-        if(cita.idcita()==id):
+        if(cita.getIdcita()==id):
             objeto={
             'idpaciente':cita.getIdpaciente(),
             'hora':cita.getHora(),
