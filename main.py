@@ -462,11 +462,12 @@ def mostrarcitas():
         datos.append(objeto)
     return (jsonify(datos))
 
-@app.route('/mostrarcita/<int:id>',methods=['GET'])
+@app.route('/mostrarcita/<string:id>',methods=['GET'])
 def mostrarcita(id):
+    idcita=int(id)
     global Citas
     for cita in Citas:
-        if(cita.idcita()==id):
+        if(cita.idcita()==idcita):
             objeto={
             'idpaciente':cita.getIdpaciente(),
             'hora':cita.getHora(),
