@@ -485,7 +485,7 @@ def actualizarcita():
     global Citas
 
     for i in range(len(Citas)):
-            if(Citas[i].getId()==int(request.json['idcita'])):
+            if(Citas[i].getIdcita()==int(request.json['idcita'])):
                 doctor=request.json['doctor']
                 estado=request.json['estado']
 
@@ -493,6 +493,8 @@ def actualizarcita():
                 Citas[i].setEstado(estado)
 
                 return jsonify({'Mensaje':"Cita actualizada con exito"})
+    
+    return jsonify({'Mensaje':"Cita no encontrada"})
 
 
 #Fin de metodos de rutas para Citas ---------------------------------------------------------------------
