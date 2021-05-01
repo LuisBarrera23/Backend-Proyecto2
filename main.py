@@ -455,7 +455,8 @@ def mostrarcitas():
             'fecha':cita.getFecha(),
             'motivo':cita.getMotivo(),
             'idcita':cita.getIdcita(),
-            'estado':cita.getEstado()
+            'estado':cita.getEstado(),
+            'doctor':cita.getDoctor()
         }
         datos.append(objeto)
     return (jsonify(datos))
