@@ -452,7 +452,7 @@ def mostrarcitas():
     datos=[]
     for cita in Citas:
         for paciente in Pacientes:
-            if(paciente.getId()==int(cita.getIdpaciente)):
+            if(paciente.getId()==int(cita.getIdpaciente())):
                 nombre=paciente.getNombre()+' '+paciente.getApellido()
         objeto={
             'idpaciente':cita.getIdpaciente(),
