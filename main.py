@@ -517,7 +517,7 @@ def actualizarcita():
                     return jsonify({'Mensaje':"Cita actualizada con exito"})
                 
 
-                if(estado=="Aceptada"):
+                if(estado=="Aceptada" or estado=="Completada"):
                     Citas[i].setDoctor(doctor)
                     Citas[i].setEstado(estado)
                     Citas[i].setIddoctor(iddoctor)
