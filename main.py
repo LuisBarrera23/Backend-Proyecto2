@@ -447,8 +447,13 @@ def actualizarmedicamento():
 @app.route('/mostrarcitas',methods=['GET'])
 def mostrarcitas():
     global Citas
+    global Pacientes
+    nombre=''
     datos=[]
     for cita in Citas:
+        for paciente in Pacientes:
+            if(paciente.getId()==int(cita.getIdpaciente)):
+                nombre=str(paciente.getNombre(),' ',paciente.getApellido())
         objeto={
             'idpaciente':cita.getIdpaciente(),
             'hora':cita.getHora(),
@@ -457,7 +462,8 @@ def mostrarcitas():
             'idcita':cita.getIdcita(),
             'estado':cita.getEstado(),
             'doctor':cita.getDoctor(),
-            'iddoctor':cita.getIddoctor()
+            'iddoctor':cita.getIddoctor(),
+            'paciente':nombre
         }
         datos.append(objeto)
     return (jsonify(datos))
