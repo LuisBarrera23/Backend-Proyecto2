@@ -538,7 +538,7 @@ def actualizarcita():
                     Citas[i].setIddoctor(iddoctor)
 
                     for i in range(len(Doctores)):
-                        if Doctores[i].getId==iddoctor:
+                        if Doctores[i].getId()==iddoctor:
                             Doctores[i].setCitasatendidas(Doctores[i].getCitasatendidas()+1)
 
                     return jsonify({'Mensaje':"Cita actualizada con exito"})
