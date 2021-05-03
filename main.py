@@ -555,12 +555,29 @@ def actualizarcita():
 @app.route('/topdoctores',methods=['GET'])
 def topdoctores():
     global Doctores
-    sorted(Doctores, key=attrgetter('citasatendias'))
+    objetos=[]
+    datos=[]
+    datos=sorted(Doctores, key=attrgetter('citasatendias'))
+    for dat in datos:
+        objeto={
+            'nombre':dat.getNombre()+" "+dat.getApellido(),
+            'citasatendidas':dat.getCitasatendidas()
+        }
+        objetos.append(objeto)
+    return jsonify(objetos)
 
 @app.route('/topdoctores1',methods=['GET'])
 def topdoctores1():
     global Doctores
+    objetos=[]
     Doctores=sorted(Doctores, key=attrgetter('citasatendias'))
+    for doctor in Doctores:
+        objeto={
+            'nombre':doctor.getNombre()+" "+doctor.getApellido(),
+            'citasatendidas':doctor.getCitasatendidas()
+        }
+        objetos.append(objeto)
+    return jsonify(objetos)
 
 #Fin de metodos de rutas para Tops ---------------------------------------------------------------------
 
