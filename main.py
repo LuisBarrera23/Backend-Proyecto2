@@ -9,6 +9,8 @@ from Enfermera import Enfermera
 from Medicamento import Medicamento
 from Cita import Cita
 
+from operator import attrgetter
+
 import json
 
 # creacion de arreglo de objetos necesarios
@@ -549,6 +551,20 @@ def actualizarcita():
 #Fin de metodos de rutas para Citas ---------------------------------------------------------------------
 
 
+#Metodos de rutas necesarias para Tops -----------------------------------------------------------------
+@app.route('/topdoctores',methods=['GET'])
+def topdoctores():
+    global Doctores
+    datos=[]
+    sorted(Doctores, key=attrgetter('citasatendias'))
+
+@app.route('/topdoctores1',methods=['GET'])
+def topdoctores():
+    global Doctores
+    datos=[]
+    Doctores=sorted(Doctores, key=attrgetter('citasatendias'))
+
+#Fin de metodos de rutas para Tops ---------------------------------------------------------------------
 
 
             
