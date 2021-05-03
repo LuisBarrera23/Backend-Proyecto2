@@ -555,13 +555,11 @@ def actualizarcita():
 @app.route('/topdoctores',methods=['GET'])
 def topdoctores():
     global Doctores
-    datos=[]
     sorted(Doctores, key=attrgetter('citasatendias'))
 
 @app.route('/topdoctores1',methods=['GET'])
-def topdoctores():
+def topdoctores1():
     global Doctores
-    datos=[]
     Doctores=sorted(Doctores, key=attrgetter('citasatendias'))
 
 #Fin de metodos de rutas para Tops ---------------------------------------------------------------------
