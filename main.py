@@ -525,20 +525,21 @@ def actualizarcita():
                     return jsonify({'Mensaje':"Cita actualizada con exito"})
                 
 
-                if(estado=="Completada"):
+                if(estado=="Aceptada"):
                     Citas[i].setDoctor(doctor)
                     Citas[i].setEstado(estado)
                     Citas[i].setIddoctor(iddoctor)
 
                     return jsonify({'Mensaje':"Cita actualizada con exito"})
                 
-                if(estado=='Aceptada'):
+                if(estado=='Completada'):
                     Citas[i].setDoctor(doctor)
                     Citas[i].setEstado(estado)
                     Citas[i].setIddoctor(iddoctor)
 
                     for i in range(len(Doctores)):
-                        Doctores[i].setCitasatendidas(Doctores[i].getCitasatendidas()+1)
+                        if Doctores[i].getId==iddoctor:
+                            Doctores[i].setCitasatendidas(Doctores[i].getCitasatendidas()+1)
 
                     return jsonify({'Mensaje':"Cita actualizada con exito"})
     
