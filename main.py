@@ -556,13 +556,17 @@ def actualizarcita():
 def topdoctores():
     global Doctores
     objetos=[]
-    datos=sorted(Doctores, key=lambda doctor:doctor.citasatendidas)
+    datos=sorted(Doctores, key=lambda doctor:doctor.citasatendidas, reverse=True)
+    contador=1
     for dat in datos:
-        objeto={
+        if contador<4:
+            objeto={
+            'puesto':contador,
             'nombre':dat.getNombre()+" "+dat.getApellido(),
             'citasatendidas':dat.getCitasatendidas()
-        }
-        objetos.append(objeto)
+            }
+            objetos.append(objeto)
+        contador+=1
     return jsonify(objetos)
 
 
