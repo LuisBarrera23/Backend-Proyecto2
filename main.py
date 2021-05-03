@@ -175,7 +175,8 @@ def mostrarmedicos():
             'contraseña':doctor.getContraseña(),
             'especialidad':doctor.getEspecialidad(),
             'telefono':doctor.getTelefono(),
-            'id':doctor.getId()
+            'id':doctor.getId(),
+            'citasatendidas':doctor.getCitasatendidas()
         }
         datos.append(objeto)
     return (jsonify(datos))
@@ -509,6 +510,7 @@ def guardarcita():
 @app.route('/actualizarcita', methods=['PUT'])
 def actualizarcita():
     global Citas
+    global Doctores
 
     for i in range(len(Citas)):
             if(Citas[i].getIdcita()==int(request.json['idcita'])):
@@ -523,13 +525,22 @@ def actualizarcita():
                     return jsonify({'Mensaje':"Cita actualizada con exito"})
                 
 
-                if(estado=="Aceptada" or estado=="Completada"):
+                if(estado=="Completada"):
                     Citas[i].setDoctor(doctor)
                     Citas[i].setEstado(estado)
                     Citas[i].setIddoctor(iddoctor)
 
                     return jsonify({'Mensaje':"Cita actualizada con exito"})
                 
+                if(estado=='Aceptada'):
+                    Citas[i].setDoctor(doctor)
+                    Citas[i].setEstado(estado)
+                    Citas[i].setIddoctor(iddoctor)
+
+                    for i in range(len(Doctores)):
+                        Doctores[i].setCitasatendidas(Doctores[i].getCitasatendidas()+1)
+
+                    return jsonify({'Mensaje':"Cita actualizada con exito"})
     
     return jsonify({'Mensaje':"Cita no encontrada"})
 

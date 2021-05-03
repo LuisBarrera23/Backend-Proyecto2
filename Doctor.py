@@ -9,6 +9,7 @@ class Doctor:
         self.especialidad=especialidad
         self.telefono=telefono
         self.id=id
+        self.citasatendidas=0
     
 
     #  metodos get
@@ -40,6 +41,9 @@ class Doctor:
     
     def getId(self):
         return self.id
+
+    def getCitasatendidas(self):
+        return self.citasatendidas
     
     # Metodos set
 
@@ -69,5 +73,8 @@ class Doctor:
 
     def setId(self,id):
         self.id=id
+
+    def setCitasatendidas(self,citasatendidas):
+        self.citasatendidas=citasatendidas
     
     
