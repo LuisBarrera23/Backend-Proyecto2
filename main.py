@@ -556,8 +556,7 @@ def actualizarcita():
 def topdoctores():
     global Doctores
     objetos=[]
-    datos=[]
-    datos=sorted(Doctores, key=attrgetter('citasatendias'))
+    datos=sorted(Doctores, key=lambda doctor:doctor.citasatendidas)
     for dat in datos:
         objeto={
             'nombre':dat.getNombre()+" "+dat.getApellido(),
