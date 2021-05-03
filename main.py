@@ -565,18 +565,6 @@ def topdoctores():
         objetos.append(objeto)
     return jsonify(objetos)
 
-@app.route('/topdoctores1',methods=['GET'])
-def topdoctores1():
-    global Doctores
-    objetos=[]
-    Doctores=sorted(Doctores, key=attrgetter('citasatendias'))
-    for doctor in Doctores:
-        objeto={
-            'nombre':doctor.getNombre()+" "+doctor.getApellido(),
-            'citasatendidas':doctor.getCitasatendidas()
-        }
-        objetos.append(objeto)
-    return jsonify(objetos)
 
 #Fin de metodos de rutas para Tops ---------------------------------------------------------------------
 
