@@ -582,6 +582,24 @@ def verificarenfermedad():
     
     Enfermedades.append(Enfermedad(request.json['nombre']))
     return jsonify({'Mensaje':'Enfermedad nueva fue registrada'})
+
+
+@app.route('/topenfermedades',methods=['GET'])
+def topenfermedades():
+    global Enfermedades
+    objetos=[]
+    datos=sorted(Enfermedades, key=lambda enfermedad:enfermedad.cantidad, reverse=True)
+    contador=1
+    for dat in datos:
+        if contador<4:
+            objeto={
+            'puesto':contador,
+            'nombre':dat.getNombre(),
+            'cantidad':dat.getCantidad()
+            }
+            objetos.append(objeto)
+        contador+=1
+    return jsonify(objetos)
             
 
 #Fin de metodos de rutas para Tops ---------------------------------------------------------------------
