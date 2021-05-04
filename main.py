@@ -8,6 +8,7 @@ from Doctor import Doctor
 from Enfermera import Enfermera
 from Medicamento import Medicamento
 from Cita import Cita
+from Enfermedad import Enfermedad
 
 from operator import attrgetter
 
@@ -29,6 +30,8 @@ cMedicamentos=0
 
 Citas=[]
 cCitas=0
+
+Enfermedades=[]
 
 app=Flask(__name__)
 CORS(app)
@@ -569,12 +572,22 @@ def topdoctores():
         contador+=1
     return jsonify(objetos)
 
+@app.route('/verificarenfermedad',methods=['POST'])
+def verificarenfermedad():
+    global Enfermedades
+    for i in range(len(Enfermedades)):
+        if (Enfermedades[i].getNombre()==request.json['nombre']):
+            Enfermedades[i].setCantidad(Enfermedades[i].getCantidad()+1)
+            return jsonify({'Mensaje':'Enfermedad ya registrada se sumo el contador'})
+    
+    Enfermedades.append(Enfermedad(request.json['nombre']))
+    return jsonify({'Mensaje':'Enfermedad nueva fue registrada'})
+            
 
 #Fin de metodos de rutas para Tops ---------------------------------------------------------------------
 
 
-            
-
+        
     
 
 if __name__ == '__main__':
